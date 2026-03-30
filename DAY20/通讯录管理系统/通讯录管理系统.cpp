@@ -59,13 +59,28 @@ void addperson(addressbooks * abs)
 				abs->personarray[abs->p_size].p_sex = sex;
 				break;
 			}
+			cout << "您的输入有误 请重新输入" << endl;
 		}
 		
 		//年龄
-
+       cout << "请输入年龄" << endl;
+       int age = 0;
+       cin >> age;
+       abs->personarray[abs->p_size].p_age = age;
 		//电话
-
+       cout << "请输入电话" << endl;
+       string phone;//string类型不能用  =0 来初始化
+       abs->personarray[abs->p_size].p_phone = phone;
 		//地址
+		cout << "请输入家庭地址" << endl;
+        string addr;
+        cin >> addr;
+        abs->personarray[abs->p_size].p_addr = addr;
+		//更新通讯录人数
+        abs->p_size++;
+        cout << "已添加成功" << endl;
+        system("pause");//请按任意键继续
+        system("cls");//清屏
 	}
 }
 
@@ -79,7 +94,7 @@ void showmunu()
 	cout << "*****4.查找联系人*****" << endl;
 	cout << "*****5.修改联系人*****" << endl;
 	cout << "*****6.清空联系人*****" << endl;
-	cout << "*****7.推出通讯录*****" << endl;
+	cout << "*****0.推出通讯录*****" << endl;
 	cout << "**********************" << endl;
 }
 
