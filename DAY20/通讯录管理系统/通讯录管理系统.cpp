@@ -84,6 +84,100 @@ void addperson(addressbooks * abs)
 	}
 }
 
+
+
+//封装显示联系人函数
+void showperson(addressbooks* abs)
+{
+	//判断是否通讯录人数为0，如果为0，提示记录为空
+	if (abs->p_size == 0)//for循环语句这里不加；号
+	{
+		cout << "当前记录为空" << endl;
+	}
+	else
+	{
+		for (int i = 0; i < abs->p_size; i++)
+		{
+			cout << "姓名： " << abs->personarray[i].p_name << "\t";//水平制表符 空8格
+			cout << "性别： " << (abs->personarray[i].p_sex == 1 ? "男" : "女") << "\t";//三目运算符节俭
+			cout << "年龄： " << abs->personarray[i].p_age << "\t";
+			cout << "电话： " << abs->personarray[i].p_phone << "\t";
+			cout << "家庭住址： " << abs->personarray[i].p_addr << endl;
+		}
+	}
+	system("pause");//任意键继续
+	system("cls");//清屏
+} 
+
+//检测联系人是否存在如果存在，返回联系人所在数组中的具体位置，不存在返回-1
+//参数1 通讯录   参数2 对比姓名
+int isexist(addressbooks * abs,string name)
+{
+	for (int i = 0; i < abs->p_size; i++)
+	{
+		if (abs->personarray[i].p_name == name)
+		{
+			//找到了用户输入的姓名
+			return i;//返回下标编码
+		}
+	}
+	return - 1;//如果遍历结束都未找到，返回-1
+}
+
+//3.封装删除联系人的函数
+void deleteperson(addressbooks* abs)
+{
+	cout << "请输入您要删除的联系人" << endl;
+	string name;
+	cin >> name;
+	//ret == -1  未找到
+	//ret != -1  找到了
+	int ret = isexist(abs, name);
+	if (ret != -1)
+	{
+		//找到人了 删除他  逻辑为 将删除后的人员数据向前移动 并将通讯录人数-1  要一个一个往前移
+		for (int i = ret; i < abs->p_size; i++)
+		{
+			//数据前移操作
+			abs->personarray[i] = abs->personarray[i + 1];
+		}
+		abs->p_size--;
+		cout << "删除成功" << endl;
+	}
+	else
+	{
+		cout << "查无此人" << endl;
+	}
+	system("pause");
+	system("cls");
+}
+
+//封装查找联系人的函数
+void findperson(addressbooks* abs)
+{
+	cout << "请输入您要查找的联系人： " << endl;
+	string name;
+	cin >> name;
+	//判断指定的联系人是否存在与通讯录中
+	int ret = isexist(abs, name);
+	if (ret != -1)//找到人了
+	{
+		cout << "姓名 ： " << abs->personarray[ret].p_name << "\t";
+		cout << "性别 ： " << abs->personarray[ret].p_sex << "\t";
+		cout << "年龄 ： " << abs->personarray[ret].p_age << "\t";
+		cout << "电话 ： " << abs->personarray[ret].p_phone << "\t";
+		cout << "住址 ： " << abs->personarray[ret].p_addr << endl;
+	}
+	else//未找到
+	{
+		cout << "查无此人" << endl;
+	}
+	system("pause");
+	system("cls");
+}
+
+
+
 //封装菜单界面
 void showmunu()
 {
@@ -97,6 +191,8 @@ void showmunu()
 	cout << "*****0.推出通讯录*****" << endl;
 	cout << "**********************" << endl;
 }
+
+
 
 
 
@@ -121,10 +217,26 @@ while (true)//除退出外持续使用程序
 		addperson(&abs);//利用地址传递 修改实参
 		break;
 	case 2://显示联系人
+		showperson(&abs);
 		break;
 	case 3://删除联系人
+		//{
+//	cout << "请输入删除联系人姓名： " << endl;
+//	string name;
+//	cin >> name;
+//	if (isexist(&abs, name) == -1)//已声明变量不可重复使用
+//	{
+//		cout << "查无此人" << endl;
+//	}
+//	else
+//	{
+//		cout << "找到此人" << endl;
+//	}
+//}//break上方如果代码过多得使用{}框起来
+	deleteperson(&abs);
 		break;
 	case 4://查找联系人
+		findperson(&abs);
 		break;
 	case 5://修改联系人
 		break;
