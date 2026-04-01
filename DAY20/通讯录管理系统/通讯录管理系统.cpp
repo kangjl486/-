@@ -176,7 +176,60 @@ void findperson(addressbooks* abs)
 	system("cls");
 }
 
+//封装修改联系人的函数
+void modifyperson(addressbooks* abs)
+{
+	cout << "请输入您要修改的联系人： " << endl;
+	string name;
+	cin >> name;
 
+	int ret = isexist(abs, name);
+	if (ret != -1)
+	{
+		//姓名
+		string name;
+		cout << "请输入姓名： " << endl;
+		cin >> name;
+		abs->personarray[ret].p_name = name;
+		//性别
+		cout << "请输入性别： " << endl;
+		cout << "1----男" << endl;
+		cout << "2----女" << endl;
+		int sex = 0;
+		cin >> sex;
+		while (true)
+		{
+			if (sex == 1 || sex == 2)
+			{
+				abs->personarray[ret].p_sex = sex;
+				break;
+			}
+			cout << "输入有误请重新输入" << endl;
+		}
+		//年龄
+		cout << "请输入年龄：" << endl;
+		int age = 0;
+		cin >> age;
+		abs->personarray[ret].p_age = age;
+		//联系电话
+		cout << "请输入联系电话： " << endl;
+		string phone;
+		cin >> phone;
+		abs->personarray[ret].p_phone = phone;
+		//家庭住址
+		cout << "请输入家庭住址： " << endl;
+		string addr;
+		cin >> addr;
+		abs->personarray[ret].p_addr = addr;
+		cout << "修改成功！" << endl;
+	}
+	else
+	{
+		cout << "查无此人： " << endl;
+	}
+	system("pause");
+	system("cls");
+}
 
 //封装菜单界面
 void showmunu()
@@ -239,6 +292,7 @@ while (true)//除退出外持续使用程序
 		findperson(&abs);
 		break;
 	case 5://修改联系人
+		modifyperson(&abs);
 		break;
 	case 6://清空联系人
 		break;
