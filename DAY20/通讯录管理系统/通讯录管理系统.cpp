@@ -231,6 +231,19 @@ void modifyperson(addressbooks* abs)
 	system("cls");
 }
 
+
+/封装清空联系人函数    从逻辑上将通讯录中人数制为0
+void cleanpeson(addressbooks * abs)
+{
+	abs->p_size = 0;//将档期记录联系人数量重置为0，做逻辑清空操作
+	cout << "通讯录已清空" << endl;
+	//按任意键清屏
+	system("pause");
+	system("cls");
+}
+
+
+
 //封装菜单界面
 void showmunu()
 {
@@ -295,6 +308,7 @@ while (true)//除退出外持续使用程序
 		modifyperson(&abs);
 		break;
 	case 6://清空联系人
+		cleanperson（&abs);
 		break;
 	case 0://推出通讯录
 		cout << "欢迎下次使用通讯录" << endl;
