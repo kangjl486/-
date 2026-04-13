@@ -15,7 +15,7 @@ struct person
 	//电话
 	string p_phone;
     //住址
-	string p_addr;
+	string p_addr;//
 };
 //设计通讯录结构体
 struct addressbooks
